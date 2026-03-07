@@ -1,0 +1,50 @@
+/* === Секции меню === */
+
+/* Карточка-фичер (комбо, роллы) */
+.featured-card { position: relative; overflow: hidden; padding: 1rem; }
+.featured-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(221, 180, 118, 0.18), transparent 32%), linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.14));
+  pointer-events: none;
+}
+.featured-card > * { position: relative; }
+.featured-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.85rem; margin-bottom: 0.6rem; }
+.featured-card h3 { margin: 0; font-size: 1.18rem; }
+
+.card-meta,
+.item-meta,
+.group-count { color: var(--muted); font-size: 0.84rem; }
+.card-meta { margin-top: 0.2rem; }
+
+/* Список включений */
+.includes-list { display: grid; gap: 0.55rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.includes-list li { position: relative; padding-left: 1rem; color: #f2e5dc; font-size: 0.93rem; line-height: 1.5; }
+.includes-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.56rem;
+  left: 0;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), #c98953);
+}
+
+/* Группа меню */
+.menu-group { padding: 1rem; }
+.menu-group__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.85rem; margin-bottom: 0.95rem; }
+.menu-group h3 { margin: 0; font-size: 1.18rem; }
+
+/* Карточка отдельного блюда */
+.item-card {
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.012)), rgba(0, 0, 0, 0.08);
+}
+
+.item-card h4 { margin: 0; font-size: 1rem; line-height: 1.35; }
+.item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.85rem; }
+.item-price { color: var(--gold); font-size: 1.04rem; font-weight: 900; white-space: nowrap; }

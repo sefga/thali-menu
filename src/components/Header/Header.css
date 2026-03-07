@@ -1,0 +1,74 @@
+/* === Хедер === */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line);
+  background: rgba(18, 13, 11, 0.82);
+  backdrop-filter: blur(18px);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 0 0.65rem;
+}
+
+.brand { display: flex; flex-direction: column; gap: 0.14rem; }
+
+.brand__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  line-height: 0.88;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+}
+
+.brand__subtitle {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.header-action {
+  padding: 0.78rem 1rem;
+  background: linear-gradient(180deg, rgba(221, 180, 118, 0.14), rgba(185, 111, 64, 0.08));
+  font-size: 0.86rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* === Навигация по секциям === */
+.section-nav {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0 0 0.95rem;
+  scrollbar-width: none;
+}
+
+.section-nav::-webkit-scrollbar { display: none; }
+
+.section-nav a {
+  flex: 0 0 auto;
+  padding: 0.72rem 0.96rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.section-nav a:hover,
+.section-nav a.is-active {
+  border-color: var(--line-strong);
+  background: var(--gold-soft);
+  color: var(--text);
+}
