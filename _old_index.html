@@ -1,0 +1,818 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТХАЛИ — мобильное меню индийской кухни</title>
+    <meta name="description" content="Мобильное меню ресторана ТХАЛИ: комбо, супы, закуски, тандур, карри, выпечка, рис, лапша, роллы, десерты и напитки.">
+    <meta name="theme-color" content="#120d0b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/web/1.webp" type="image/webp">
+    <style>
+        :root {
+            --surface: rgba(30, 20, 17, 0.84);
+            --surface-soft: rgba(255, 255, 255, 0.03);
+            --text: #f7eee8;
+            --muted: #d3c0b5;
+            --gold: #ddb476;
+            --gold-soft: rgba(221, 180, 118, 0.14);
+            --copper: #b96f40;
+            --line: rgba(221, 180, 118, 0.16);
+            --line-strong: rgba(221, 180, 118, 0.34);
+            --shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+            --radius: 28px;
+            --max-width: 1180px;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 8rem; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            font-family: "Manrope", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(185, 111, 64, 0.24), transparent 28%),
+                radial-gradient(circle at 100% 10%, rgba(221, 180, 118, 0.16), transparent 24%),
+                linear-gradient(180deg, #1b1411 0%, #120d0b 42%, #0d0807 100%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.4;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.015), transparent 28%),
+                linear-gradient(315deg, rgba(255, 255, 255, 0.015), transparent 24%);
+        }
+
+        img { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+        *:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+        .container { width: min(calc(100% - 1.25rem), var(--max-width)); margin: 0 auto; }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid var(--line);
+            background: rgba(18, 13, 11, 0.82);
+            backdrop-filter: blur(18px);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.9rem 0 0.65rem;
+        }
+
+        .brand { display: flex; flex-direction: column; gap: 0.14rem; }
+        .brand__title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 2rem;
+            line-height: 0.88;
+            letter-spacing: 0.16em;
+            color: var(--gold);
+        }
+
+        .brand__subtitle {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .header-action,
+        .button,
+        .poster-action-link,
+        .inline-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            border-radius: 999px;
+            border: 1px solid var(--line-strong);
+            transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+        }
+
+        .header-action {
+            padding: 0.78rem 1rem;
+            background: linear-gradient(180deg, rgba(221, 180, 118, 0.14), rgba(185, 111, 64, 0.08));
+            font-size: 0.86rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .section-nav {
+            display: flex;
+            gap: 0.6rem;
+            overflow-x: auto;
+            padding: 0 0 0.95rem;
+            scrollbar-width: none;
+        }
+
+        .section-nav::-webkit-scrollbar,
+        .poster-strip::-webkit-scrollbar { display: none; }
+
+        .section-nav a {
+            flex: 0 0 auto;
+            padding: 0.72rem 0.96rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .section-nav a:hover,
+        .section-nav a.is-active {
+            border-color: var(--line-strong);
+            background: var(--gold-soft);
+            color: var(--text);
+        }
+
+        .hero { padding: 1.25rem 0 0; }
+        .hero-grid,
+        .featured-grid,
+        .group-stack,
+        .item-grid { display: grid; gap: 1rem; }
+
+        .surface-card,
+        .menu-group,
+        .poster-tile,
+        .featured-card,
+        .footer-card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)), var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-copy { padding: 1.25rem; }
+        .eyebrow,
+        .menu-kicker,
+        .poster-index,
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--copper);
+        }
+
+        .hero-copy h1,
+        .section-title-row h2 {
+            margin: 0;
+            font-family: "Cormorant Garamond", serif;
+            line-height: 0.9;
+            letter-spacing: 0.04em;
+        }
+
+        .hero-copy h1 {
+            margin-top: 0.8rem;
+            font-size: clamp(3.3rem, 18vw, 6.2rem);
+            color: var(--gold);
+        }
+
+        .hero-lead,
+        .section-copy,
+        .hero-note,
+        .poster-tile p,
+        .featured-text,
+        .item-desc,
+        .footer-text {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .hero-lead { margin-top: 0.85rem; font-size: 1rem; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.15rem; }
+        .button { padding: 0.9rem 1.05rem; font-size: 0.95rem; font-weight: 800; }
+        .button--primary { background: linear-gradient(135deg, var(--gold), #c98953); border-color: transparent; color: #140d0a; }
+        .button--secondary,
+        .inline-link,
+        .poster-action-link { background: rgba(255, 255, 255, 0.03); }
+
+        .hero-facts {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin: 1.25rem 0 0;
+        }
+
+        .hero-facts div {
+            min-height: 86px;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 22px;
+            background: var(--surface-soft);
+        }
+
+        .hero-facts dt { margin: 0; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+        .hero-facts dd { margin: 0.4rem 0 0; font-size: 1rem; font-weight: 800; }
+        .hero-note { margin-top: 1rem; font-size: 0.92rem; }
+
+        .hero-poster { position: relative; overflow: hidden; padding: 0.85rem; }
+        .hero-poster img,
+        .poster-tile img { width: 100%; aspect-ratio: 595 / 842; object-fit: cover; border-radius: 22px; }
+
+        .hero-poster__meta {
+            position: absolute;
+            right: 1.45rem;
+            bottom: 1.45rem;
+            left: 1.45rem;
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            background: rgba(12, 8, 7, 0.72);
+            backdrop-filter: blur(12px);
+        }
+
+        .poster-eyebrow { display: block; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+        .hero-poster strong { display: block; margin-top: 0.3rem; font-size: 1.05rem; }
+        .poster-action,
+        .price-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--gold), #c98953);
+            color: #150e0b;
+            font-size: 0.82rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .section { padding: 3.5rem 0 0; }
+        .section-head { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.25rem; }
+        .section-title-row { display: flex; flex-direction: column; align-items: flex-start; gap: 0.65rem; margin-top: 0.3rem; }
+        .section-title-row h2 { font-size: clamp(2.15rem, 11vw, 4.1rem); color: var(--gold); }
+        .section-range { display: inline-flex; align-items: center; padding: 0.48rem 0.78rem; border-radius: 999px; background: var(--gold-soft); font-size: 0.84rem; font-weight: 800; border: 1px solid var(--line-strong); }
+
+        .poster-strip {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(76%, 1fr);
+            gap: 0.9rem;
+            overflow-x: auto;
+            padding-bottom: 0.25rem;
+            scroll-snap-type: x mandatory;
+        }
+
+        .poster-tile { overflow: hidden; scroll-snap-align: start; }
+        .poster-tile__body,
+        .featured-card,
+        .menu-group,
+        .footer-card { padding: 1rem; }
+        .poster-tile h3,
+        .featured-card h3,
+        .menu-group h3,
+        .item-card h4,
+        .footer-logo { margin: 0; }
+        .poster-tile h3,
+        .featured-card h3,
+        .menu-group h3 { font-size: 1.18rem; }
+        .poster-tile p { margin-top: 0.55rem; font-size: 0.92rem; }
+        .poster-tile__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.95rem; }
+        .poster-action-link { padding: 0.7rem 0.9rem; font-size: 0.84rem; font-weight: 700; }
+
+        .featured-card { position: relative; overflow: hidden; }
+        .featured-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(221, 180, 118, 0.18), transparent 32%), linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.14));
+            pointer-events: none;
+        }
+
+        .featured-card > * { position: relative; }
+        .featured-card__top,
+        .menu-group__header,
+        .item-top,
+        .footer-card { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.85rem; }
+        .featured-card__top { margin-bottom: 0.6rem; }
+        .card-meta,
+        .item-meta,
+        .group-count { color: var(--muted); font-size: 0.84rem; }
+        .card-meta { margin-top: 0.2rem; }
+
+        .includes-list { display: grid; gap: 0.55rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+        .includes-list li { position: relative; padding-left: 1rem; color: #f2e5dc; font-size: 0.93rem; line-height: 1.5; }
+        .includes-list li::before {
+            content: "";
+            position: absolute;
+            top: 0.56rem;
+            left: 0;
+            width: 0.36rem;
+            height: 0.36rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--gold), #c98953);
+        }
+
+        .menu-group__header { margin-bottom: 0.95rem; }
+        .item-card {
+            padding: 0.95rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.012)), rgba(0, 0, 0, 0.08);
+        }
+
+        .item-card h4 { font-size: 1rem; line-height: 1.35; }
+        .item-price { color: var(--gold); font-size: 1.04rem; font-weight: 900; white-space: nowrap; }
+        .footer-card { margin: 4rem auto 1.5rem; }
+        .footer-logo { font-family: "Cormorant Garamond", serif; font-size: 2rem; letter-spacing: 0.14em; color: var(--gold); }
+        .footer-text { margin-top: 0.35rem; font-size: 0.92rem; }
+
+        .header-action:hover,
+        .button:hover,
+        .poster-action-link:hover,
+        .inline-link:hover { transform: translateY(-1px); border-color: rgba(255, 224, 189, 0.5); }
+
+        @media (min-width: 720px) {
+            .container { width: min(calc(100% - 2rem), var(--max-width)); }
+            .hero-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .poster-strip { grid-auto-columns: minmax(260px, 31%); }
+            .featured-grid,
+            .group-stack--two,
+            .item-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 960px) {
+            html { scroll-padding-top: 8.5rem; }
+            .hero { padding-top: 1.6rem; }
+            .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr); }
+            .featured-card,
+            .menu-group,
+            .hero-copy,
+            .footer-card { padding: 1.5rem; }
+            .section { padding-top: 4.4rem; }
+            .section-head { flex-direction: row; align-items: end; justify-content: space-between; }
+            .section-head__content { max-width: 760px; }
+            .section-title-row { flex-direction: row; align-items: center; gap: 1rem; }
+            .group-stack--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body id="top">
+    <header class="site-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="brand">
+                    <a class="brand__title" href="#top">ТХАЛИ</a>
+                    <span class="brand__subtitle">Мобильное меню индийской кухни</span>
+                </div>
+                <a class="header-action" href="#posters">Постеры</a>
+            </div>
+            <nav class="section-nav" aria-label="Разделы меню">
+                <a data-nav-link class="is-active" href="#combo">Комбо</a>
+                <a data-nav-link href="#soups">Супы и закуски</a>
+                <a data-nav-link href="#tandoor">Тандур</a>
+                <a data-nav-link href="#curry">Карри</a>
+                <a data-nav-link href="#bread">Выпечка</a>
+                <a data-nav-link href="#rice">Рис и лапша</a>
+                <a data-nav-link href="#rolls">Роллы</a>
+                <a data-nav-link href="#sweets">Сладости и напитки</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-copy surface-card">
+                    <span class="eyebrow">Премиальная индийская кухня</span>
+                    <h1>ТХАЛИ</h1>
+                    <p class="hero-lead">«Вкус настоящей Индии в каждой тарелке». Быстрая навигация сверху, точные цены, крупные карточки и печатные постеры в одном мобильном меню.</p>
+                    <div class="hero-actions">
+                        <a class="button button--primary" href="#combo">Смотреть меню</a>
+                        <a class="button button--secondary" href="#posters">Печатные постеры</a>
+                    </div>
+                    <dl class="hero-facts">
+                        <div><dt>Режим</dt><dd>11:00 - 23:00</dd></div>
+                        <div><dt>Разделов</dt><dd>8</dd></div>
+                        <div><dt>Позиции</dt><dd>40</dd></div>
+                        <div><dt>Формат</dt><dd>Цифровое + печать</dd></div>
+                    </dl>
+                    <p class="hero-note">Интерфейс собран mobile-first: категории остаются под рукой, а весь основной каталог читается без мелкого текста и без лишнего зума.</p>
+                </div>
+                <a class="hero-poster surface-card" href="images/1.png" target="_blank" rel="noopener noreferrer" aria-label="Открыть постер фирменной тарелки в полном размере">
+                    <img src="images/web/1.webp" alt="Печатный постер фирменной тарелки" width="720" height="1018" fetchpriority="high">
+                    <div class="hero-poster__meta">
+                        <div><span class="poster-eyebrow">Постер 01</span><strong>Фирменные тарелки</strong></div>
+                        <span class="poster-action">PNG</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section id="posters" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Печатная версия</span>
+                        <div class="section-title-row">
+                            <h2>Постеры меню</h2>
+                            <span class="section-range">9 файлов</span>
+                        </div>
+                        <p class="section-copy">Листайте вправо на телефоне. Каждый постер можно открыть в полном PNG и быстро перейти к соответствующему разделу цифрового меню.</p>
+                    </div>
+                </div>
+
+                <div class="poster-strip" aria-label="Постеры меню">
+                    <article class="poster-tile">
+                        <img src="images/web/1.webp" alt="Постер фирменных тарелок" width="720" height="1018">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">01</span>
+                            <h3>Фирменные тарелки</h3>
+                            <p>Комбо Тхали: мясное и овощное предложение.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#combo">К разделу</a>
+                                <a class="poster-action-link" href="images/1.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/2.webp" alt="Постер супов и закусок, вариант 1" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">02</span>
+                            <h3>Супы и закуски</h3>
+                            <p>Первый вариант печатного листа с супами, самосой и рулеткой.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#soups">К разделу</a>
+                                <a class="poster-action-link" href="images/2.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/3.webp" alt="Постер раздела карри" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">03</span>
+                            <h3>Карри</h3>
+                            <p>Классические позиции с мясом, курицей, овощами и чана масала.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#curry">К разделу</a>
+                                <a class="poster-action-link" href="images/3.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/4.webp" alt="Постер тандура, гриля и фирменных блюд" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">04</span>
+                            <h3>Тандур и фирменные блюда</h3>
+                            <p>Чикен тикка, фирменная курица и раздел с бирияни.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#tandoor">К разделу</a>
+                                <a class="poster-action-link" href="images/4.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/5.webp" alt="Постер супов и закусок, вариант 2" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">05</span>
+                            <h3>Супы и закуски, версия 2</h3>
+                            <p>Альтернативная композиция печатной страницы для того же раздела.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#soups">К разделу</a>
+                                <a class="poster-action-link" href="images/5.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/6.webp" alt="Постер выпечки из тандура" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">06</span>
+                            <h3>Выпечка из тандура</h3>
+                            <p>Нан, парата и роти в темной премиальной подаче.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#bread">К разделу</a>
+                                <a class="poster-action-link" href="images/6.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/7.webp" alt="Постер риса и лапши" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">07</span>
+                            <h3>Рис и лапша</h3>
+                            <p>Басмати, WOK-позиции и сытные теплые блюда.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#rice">К разделу</a>
+                                <a class="poster-action-link" href="images/7.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/8.webp" alt="Постер роллов" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">08</span>
+                            <h3>Роллы</h3>
+                            <p>Индийская шаурма с курицей или паниром.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#rolls">К разделу</a>
+                                <a class="poster-action-link" href="images/8.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="poster-tile">
+                        <img src="images/web/9.webp" alt="Постер сладостей и напитков" width="720" height="1018" loading="lazy" decoding="async">
+                        <div class="poster-tile__body">
+                            <span class="poster-index">09</span>
+                            <h3>Сладости и напитки</h3>
+                            <p>Индийские десерты, чай масала и кофейная карта.</p>
+                            <div class="poster-tile__actions">
+                                <a class="poster-action-link" href="#sweets">К разделу</a>
+                                <a class="poster-action-link" href="images/9.png" target="_blank" rel="noopener noreferrer">PNG</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="combo" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Комбо Тхали</span>
+                        <div class="section-title-row"><h2>Фирменные тарелки</h2><span class="section-range">от 950 ₽</span></div>
+                        <p class="section-copy">Два полноценных сета для гостей, которые хотят сразу получить законченный вкус Индии: рис, карри, хлеб, закуска, сладость и напиток в одной подаче.</p>
+                    </div>
+                    <a class="inline-link" href="images/1.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="featured-grid">
+                    <article class="featured-card">
+                        <div class="featured-card__top">
+                            <div><span class="menu-kicker">Мясное комбо</span><h3>Комбо Тхали №1</h3><div class="card-meta">750–850 г</div></div>
+                            <div class="price-pill">1200 ₽</div>
+                        </div>
+                        <p class="featured-text">Сет с акцентом на курицу карри и насыщенные теплые гарниры. Хороший выбор для первого знакомства с кухней.</p>
+                        <ul class="includes-list">
+                            <li>Рис Басмати</li><li>Чикен Карри</li><li>Сабджи</li><li>Чана Масала</li><li>Лепешка Роти</li><li>Самоса</li><li>Традиционная сладость</li><li>Чай Масала</li>
+                        </ul>
+                    </article>
+                    <article class="featured-card">
+                        <div class="featured-card__top">
+                            <div><span class="menu-kicker">Овощное комбо</span><h3>Комбо Тхали №2</h3><div class="card-meta">700–800 г</div></div>
+                            <div class="price-pill">950 ₽</div>
+                        </div>
+                        <p class="featured-text">Более легкий сет с двумя овощными карри, чана масала и полноценным набором сопровождающих блюд.</p>
+                        <ul class="includes-list">
+                            <li>Рис Басмати</li><li>Два вида овощных карри</li><li>Чана Масала</li><li>Лепешка Роти</li><li>Овощная самоса</li><li>Традиционная сладость</li><li>Чай</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="soups" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Супы и закуски</span>
+                        <div class="section-title-row"><h2>Теплый старт</h2><span class="section-range">85–290 ₽</span></div>
+                        <p class="section-copy">Согревающие супы и быстрые закуски, которые удобно брать отдельно или добавлять к основным блюдам.</p>
+                    </div>
+                    <a class="inline-link" href="images/5.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="group-stack group-stack--two">
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Раздел 1</span><h3>Супы</h3></div><span class="group-count">3 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Овощной суп</h4><div class="item-meta">300 г</div></div><div class="item-price">250 ₽</div></div><p class="item-desc">Овощной бульон, морковь, горох, фасоль и кукуруза.</p></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Куриный суп</h4><div class="item-meta">300 г</div></div><div class="item-price">290 ₽</div></div><p class="item-desc">Куриный бульон, филе и овощи.</p></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Суп Дал</h4><div class="item-meta">300 г</div></div><div class="item-price">250 ₽</div></div><p class="item-desc">Чечевица, томаты и специи.</p></article>
+                        </div>
+                    </article>
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Раздел 2</span><h3>Закуски</h3></div><span class="group-count">3 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Самоса с курицей</h4><div class="item-meta">150 г</div></div><div class="item-price">95 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Самоса с овощами</h4><div class="item-meta">150 г</div></div><div class="item-price">85 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Рулетка овощная</h4><div class="item-meta">100 г</div></div><div class="item-price">120 ₽</div></div></article>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="tandoor" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Тандур и гриль</span>
+                        <div class="section-title-row"><h2>Огонь и специи</h2><span class="section-range">250–550 ₽</span></div>
+                        <p class="section-copy">Блюда с огня, фирменная курица и рисовые позиции для тех, кто хочет более плотный и насыщенный вкус.</p>
+                    </div>
+                    <a class="inline-link" href="images/4.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="group-stack group-stack--three">
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Огонь</span><h3>Тандур / гриль</h3></div><span class="group-count">2 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Чикен Тикка</h4><div class="item-meta">100 г</div></div><div class="item-price">250 ₽</div></div><p class="item-desc">Красный маринад.</p></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Чикен Малай Тикка</h4><div class="item-meta">100 г</div></div><div class="item-price">250 ₽</div></div><p class="item-desc">Сливочный маринад.</p></article>
+                        </div>
+                    </article>
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Фирменное</span><h3>Курица</h3></div><span class="group-count">2 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Батар чикен</h4><div class="item-meta">300 г</div></div><div class="item-price">450 ₽</div></div><p class="item-desc">Сливочно-томатный соус.</p></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Чили чикен</h4><div class="item-meta">300 г</div></div><div class="item-price">450 ₽</div></div><p class="item-desc">Острый соус.</p></article>
+                        </div>
+                    </article>
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Рис</span><h3>Бирияни</h3></div><span class="group-count">2 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Бирияни с курицей</h4><div class="item-meta">400 г</div></div><div class="item-price">550 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Тихари с мясом</h4><div class="item-meta">400 г</div></div><div class="item-price">550 ₽</div></div></article>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="curry" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Карри</span>
+                        <div class="section-title-row"><h2>Аутентичные соусы</h2><span class="section-range">150–490 ₽</span></div>
+                        <p class="section-copy">Концентрированный раздел классических карри с рисом и отдельной позицией чана масала.</p>
+                    </div>
+                    <a class="inline-link" href="images/3.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="item-grid item-grid--two">
+                    <article class="item-card"><div class="item-top"><div><h4>Карри с мясом и рисом</h4><div class="item-meta">350 г</div></div><div class="item-price">490 ₽</div></div></article>
+                    <article class="item-card"><div class="item-top"><div><h4>Карри с курицей и рисом</h4><div class="item-meta">350 г</div></div><div class="item-price">490 ₽</div></div></article>
+                    <article class="item-card"><div class="item-top"><div><h4>Карри с овощами и рисом</h4><div class="item-meta">350 г</div></div><div class="item-price">450 ₽</div></div></article>
+                    <article class="item-card"><div class="item-top"><div><h4>Чана Масала</h4><div class="item-meta">150 г</div></div><div class="item-price">150 ₽</div></div><p class="item-desc">Нут в соусе.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section id="bread" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Выпечка</span>
+                        <div class="section-title-row"><h2>Лепешки из тандура</h2><span class="section-range">100–250 ₽</span></div>
+                        <p class="section-copy">Хлебная карта для подачи к карри, комбо и отдельным теплым блюдам.</p>
+                    </div>
+                    <a class="inline-link" href="images/6.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="item-grid item-grid--two">
+                    <article class="item-card"><div class="item-top"><div><h4>Гарлик Нан</h4><div class="item-meta">150 г</div></div><div class="item-price">250 ₽</div></div><p class="item-desc">С чесноком.</p></article>
+                    <article class="item-card"><div class="item-top"><div><h4>Классический Нан</h4><div class="item-meta">150 г</div></div><div class="item-price">200 ₽</div></div></article>
+                    <article class="item-card"><div class="item-top"><div><h4>Панир Парата</h4><div class="item-meta">150 г</div></div><div class="item-price">200 ₽</div></div><p class="item-desc">С сыром панир.</p></article>
+                    <article class="item-card"><div class="item-top"><div><h4>Роти</h4><div class="item-meta">120 г</div></div><div class="item-price">100 ₽</div></div><p class="item-desc">Цельнозерновая лепешка.</p></article>
+                </div>
+            </div>
+        </section>
+        <section id="rice" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Рис и лапша</span>
+                        <div class="section-title-row"><h2>Сытные гарниры и WOK</h2><span class="section-range">250–550 ₽</span></div>
+                        <p class="section-copy">Отдельные порции риса басмати и теплые блюда на основе лапши для более сытного выбора.</p>
+                    </div>
+                    <a class="inline-link" href="images/7.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="group-stack group-stack--two">
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Басмати</span><h3>Рис</h3></div><span class="group-count">3 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Рис Басмати с овощами и яйцом</h4><div class="item-meta">250 г</div></div><div class="item-price">550 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Рис Басмати с овощами</h4><div class="item-meta">250 г</div></div><div class="item-price">550 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Рис Басмати классический</h4><div class="item-meta">200 г</div></div><div class="item-price">250 ₽</div></div></article>
+                        </div>
+                    </article>
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">WOK</span><h3>Лапша</h3></div><span class="group-count">2 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Лапша Курица / Овощи</h4><div class="item-meta">300 г</div></div><div class="item-price">490 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Лапша с овощами и яйцом</h4><div class="item-meta">300 г</div></div><div class="item-price">390 ₽</div></div></article>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="rolls" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Роллы</span>
+                        <div class="section-title-row"><h2>Индийская шаурма</h2><span class="section-range">300–390 ₽</span></div>
+                        <p class="section-copy">Быстрые позиции для перекуса: ролл с курицей или вариант с овощами и сыром панир.</p>
+                    </div>
+                    <a class="inline-link" href="images/8.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="featured-grid">
+                    <article class="featured-card">
+                        <div class="featured-card__top"><div><span class="menu-kicker">Классика</span><h3>Ролл с курицей</h3><div class="card-meta">400 г</div></div><div class="price-pill">300 ₽</div></div>
+                        <p class="featured-text">Курица гриль и овощи в формате, который удобно брать с собой.</p>
+                    </article>
+                    <article class="featured-card">
+                        <div class="featured-card__top"><div><span class="menu-kicker">Вегетарианский</span><h3>Ролл Овощи и Панир</h3><div class="card-meta">400 г</div></div><div class="price-pill">390 ₽</div></div>
+                        <p class="featured-text">Сыр панир и овощи в более мягком и насыщенном вкусовом профиле.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="sweets" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-head__content">
+                        <span class="section-label">Сладости и напитки</span>
+                        <div class="section-title-row"><h2>Финал меню</h2><span class="section-range">85–140 ₽</span></div>
+                        <p class="section-copy">Десерты и напитки для завершения заказа: классический чай масала, кофе и индийские сладости.</p>
+                    </div>
+                    <a class="inline-link" href="images/9.png" target="_blank" rel="noopener noreferrer">Постер PNG</a>
+                </div>
+
+                <div class="group-stack group-stack--two">
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Десерты</span><h3>Сладости</h3></div><span class="group-count">4 позиции</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Ладду Кокосовое</h4><div class="item-meta">20 г</div></div><div class="item-price">85 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Ладду Морковное</h4><div class="item-meta">20 г</div></div><div class="item-price">85 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Бурфи</h4><div class="item-meta">20 г</div></div><div class="item-price">85 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Гулаб Джамун</h4><div class="item-meta">20 г</div></div><div class="item-price">95 ₽</div></div></article>
+                        </div>
+                    </article>
+                    <article class="menu-group">
+                        <div class="menu-group__header"><div><span class="menu-kicker">Напитки</span><h3>Чай и кофе</h3></div><span class="group-count">7 позиций</span></div>
+                        <div class="item-grid">
+                            <article class="item-card"><div class="item-top"><div><h4>Чай Масала с молоком</h4><div class="item-meta">200 мл</div></div><div class="item-price">110 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Чай Масала без молока</h4><div class="item-meta">250 мл</div></div><div class="item-price">90 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Чай Куркумин</h4><div class="item-meta">250 мл</div></div><div class="item-price">110 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Американо</h4><div class="item-meta">Кофе</div></div><div class="item-price">90 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Капучино</h4><div class="item-meta">Кофе</div></div><div class="item-price">120 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Латте</h4><div class="item-meta">Кофе</div></div><div class="item-price">140 ₽</div></div></article>
+                            <article class="item-card"><div class="item-top"><div><h4>Эспрессо</h4><div class="item-meta">Кофе</div></div><div class="item-price">90 ₽</div></div></article>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container">
+        <div class="footer-card">
+            <div>
+                <div class="footer-logo">ТХАЛИ</div>
+                <p class="footer-text">Мобильное меню с быстрыми категориями, корректными карточками блюд и отдельной полосой печатных постеров.</p>
+            </div>
+            <a class="button button--secondary" href="#top">Наверх</a>
+        </div>
+    </footer>
+
+    <script>
+        const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
+        const sections = navLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+        const setActiveLink = (id) => {
+            navLinks.forEach((link) => {
+                const isActive = link.getAttribute("href") === `#${id}`;
+                link.classList.toggle("is-active", isActive);
+                if (isActive) link.scrollIntoView({ block: "nearest", inline: "center" });
+            });
+        };
+        const observer = new IntersectionObserver((entries) => {
+            const visibleEntry = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (visibleEntry) setActiveLink(visibleEntry.target.id);
+        }, { rootMargin: "-38% 0px -48% 0px", threshold: [0.15, 0.3, 0.55] });
+        sections.forEach((section) => observer.observe(section));
+        setActiveLink("combo");
+    </script>
+</body>
+</html>

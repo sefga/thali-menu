@@ -1,0 +1,22 @@
+/* === Полоса постеров === */
+.poster-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(76%, 1fr);
+  gap: 0.9rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.poster-strip::-webkit-scrollbar { display: none; }
+
+.poster-tile { overflow: hidden; scroll-snap-align: start; }
+.poster-tile img { width: 100%; height: auto; border-radius: 22px; display: block; }
+
+.poster-tile__body { padding: 1rem; }
+.poster-tile h3 { margin: 0; font-size: 1.18rem; }
+.poster-tile p { margin-top: 0.55rem; font-size: 0.92rem; }
+.poster-tile__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.95rem; }
+.poster-action-link { padding: 0.7rem 0.9rem; font-size: 0.84rem; font-weight: 700; }
