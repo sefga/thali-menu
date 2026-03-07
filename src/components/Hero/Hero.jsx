@@ -19,16 +19,6 @@ export default function Hero() {
             <a className="button button--primary" href="#combo">Смотреть меню</a>
             <a className="button button--secondary" href="#posters">Печатные постеры</a>
           </div>
-          <dl className="hero-facts">
-            <div><dt>Режим</dt><dd>11:00 - 23:00</dd></div>
-            <div><dt>Разделов</dt><dd>8</dd></div>
-            <div><dt>Позиции</dt><dd>40</dd></div>
-            <div><dt>Формат</dt><dd>Цифровое + печать</dd></div>
-          </dl>
-          <p className="hero-note">
-            Интерфейс собран mobile-first: категории остаются под рукой, а весь основной каталог
-            читается без мелкого текста и без лишнего зума.
-          </p>
         </div>
 
         {/* Правая часть — постер */}
@@ -51,7 +41,6 @@ export default function Hero() {
               <span className="poster-eyebrow">Постер 01</span>
               <strong>Фирменные тарелки</strong>
             </div>
-            <span className="poster-action">PNG</span>
           </div>
         </a>
       </div>

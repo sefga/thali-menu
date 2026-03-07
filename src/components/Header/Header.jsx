@@ -15,7 +15,13 @@ export default function Header() {
     if (!navRef.current) return;
     const activeLink = navRef.current.querySelector(`[href="#${id}"]`);
     if (activeLink) {
-      activeLink.scrollIntoView({ block: 'nearest', inline: 'center' });
+      const container = navRef.current;
+      const linkRect = activeLink.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
+      const scrollLeft = container.scrollLeft + linkRect.left - containerRect.left - (containerRect.width / 2) + (linkRect.width / 2);
+      
+      container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
     }
   }, []);
 
