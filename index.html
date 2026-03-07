@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТХАЛИ — Вкус настоящей Индии</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'thali-black': '#0a0a0a',
+                        'thali-dark': '#1c1917',
+                        'thali-gold': '#d4af37',
+                        'thali-copper': '#b87333',
+                        'thali-gray': '#a8a29e',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f4;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #b87333;
+        }
+        .glass-card {
+            background: rgba(28, 25, 23, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(184, 115, 51, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-thali-black/90 backdrop-blur-md border-b border-thali-copper/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <span class="font-serif text-2xl text-thali-gold font-bold tracking-widest">ТХАЛИ</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#combo" class="hover:text-thali-gold px-3 py-2 rounded-md text-sm font-medium transition">Комбо</a>
+                        <a href="#soups" class="hover:text-thali-gold px-3 py-2 rounded-md text-sm font-medium transition">Супы</a>
+                        <a href="#tandoor" class="hover:text-thali-gold px-3 py-2 rounded-md text-sm font-medium transition">Тандур</a>
+                        <a href="#curry" class="hover:text-thali-gold px-3 py-2 rounded-md text-sm font-medium transition">Карри</a>
+                        <a href="#bread" class="hover:text-thali-gold px-3 py-2 rounded-md text-sm font-medium transition">Выпечка</a>
+                        <a href="#drinks" class="hover:text-thali-gold px-3 py-2 rounded-md text-sm font-medium transition">Напитки</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <!-- Mobile menu button placeholder -->
+                    <button class="text-thali-gold">☰</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1517244683847-745431cd4965?q=80&w=2070&auto=format&fit=crop" alt="Indian Spices" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-b from-thali-black/50 via-thali-black/70 to-thali-black"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4">
+            <h1 class="font-serif text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-thali-gold to-thali-copper mb-6 drop-shadow-lg">ТХАЛИ</h1>
+            <p class="text-xl md:text-2xl text-thali-gray italic mb-8 font-light">«Вкус настоящей Индии в каждой тарелке»</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-sm tracking-wide text-thali-copper">
+                <span class="border border-thali-copper/50 px-4 py-2 rounded-full uppercase">Ежедневно 10:00 - 23:00</span>
+                <span class="border border-thali-copper/50 px-4 py-2 rounded-full uppercase">+7 (XXX) XXX-XX-XX</span>
+            </div>
+            <div class="mt-12 animate-bounce">
+                <a href="#combo" class="text-thali-gold text-3xl">↓</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page 1: Combo Thali -->
+    <section id="combo" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center">
+            <h2 class="font-serif text-4xl text-thali-gold section-title">Комбо Тхали</h2>
+            <p class="text-thali-gray mb-12">Специальное предложение для полного погружения</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Combo 1 -->
+            <div class="glass-card rounded-xl overflow-hidden group">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1585937421612-70a008356f36?q=80&w=2070&auto=format&fit=crop" alt="Meat Thali" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute top-4 right-4 bg-thali-gold text-thali-black font-bold px-3 py-1 rounded">1200 ₽</div>
+                </div>
+                <div class="p-8">
+                    <h3 class="font-serif text-2xl text-thali-copper mb-3">Комбо Тхали №1 (Мясное)</h3>
+                    <p class="text-thali-gray text-sm mb-4">750–850 г</p>
+                    <p class="text-gray-400 leading-relaxed text-sm">Рис Басмати, Чикен Карри (курица), Сабджи (овощи карри), Чана Масала (нут), лепешка Роти, Самоса, традиционная сладость, Чай Масала.</p>
+                </div>
+            </div>
+
+            <!-- Combo 2 -->
+            <div class="glass-card rounded-xl overflow-hidden group">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=2070&auto=format&fit=crop" alt="Veg Thali" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute top-4 right-4 bg-thali-gold text-thali-black font-bold px-3 py-1 rounded">950 ₽</div>
+                </div>
+                <div class="p-8">
+                    <h3 class="font-serif text-2xl text-thali-copper mb-3">Комбо Тхали №2 (Овощное)</h3>
+                    <p class="text-thali-gray text-sm mb-4">700–800 г</p>
+                    <p class="text-gray-400 leading-relaxed text-sm">Рис Басмати, два вида овощных карри, Чана Масала (нут), лепешка Роти, овощная Самоса, традиционная сладость, чай.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 2: Soups & Snacks -->
+    <section id="soups" class="py-20 bg-thali-dark/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Soups -->
+                <div>
+                    <h2 class="font-serif text-3xl text-thali-gold mb-8 border-l-4 border-thali-copper pl-4">Супы</h2>
+                    <div class="space-y-8">
+                        <div class="flex justify-between items-start border-b border-thali-gray/20 pb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-200">Овощной суп</h3>
+                                <p class="text-thali-gray text-xs mt-1">300г • Овощной бульон, морковь, зелёный горох, фасоль, кукуруза, картофель, специи.</p>
+                            </div>
+                            <span class="text-thali-gold font-bold whitespace-nowrap ml-4">290 ₽</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-thali-gray/20 pb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-200">Куриный суп</h3>
+                                <p class="text-thali-gray text-xs mt-1">300г • Куриный бульон, куриное филе, морковь, кукуруза, зелёный горох, специи.</p>
+                            </div>
+                            <span class="text-thali-gold font-bold whitespace-nowrap ml-4">350 ₽</span>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-thali-gray/20 pb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-200">Суп Дал / Чечевичный</h3>
+                                <p class="text-thali-gray text-xs mt-1">300г • Желтая/красная чечевица, томаты, лук, чеснок, куркума, индийские специи.</p>
+                            </div>
+                            <span class="text-thali-gold font-bold whitespace-nowrap ml-4">250 ₽</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snacks -->
+                <div>
+                    <h2 class="font-serif text-3xl text-thali-gold mb-8 border-l-4 border-thali-copper pl-4">Закуски</h2>
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=2070&auto=format&fit=crop" class="w-20 h-20 object-cover rounded-lg opacity-80" alt="Samosa">
+                            <div class="flex-1 border-b border-thali-gray/20 pb-4">
+                                <div class="flex justify-between">
+                                    <h3 class="text-xl font-bold text-gray-200">Самоса с курицей</h3>
+                                    <span class="text-thali-gold font-bold">90 ₽</span>
+                                </div>
+                                <p class="text-thali-gray text-xs mt-1">80г • Хрустящее тесто, начинка из куриного фарша, картофель, морковь.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=2070&auto=format&fit=crop" class="w-20 h-20 object-cover rounded-lg opacity-80" alt="Samosa Veg">
+                            <div class="flex-1 border-b border-thali-gray/20 pb-4">
+                                <div class="flex justify-between">
+                                    <h3 class="text-xl font-bold text-gray-200">Самоса с овощами</h3>
+                                    <span class="text-thali-gold font-bold">90 ₽</span>
+                                </div>
+                                <p class="text-thali-gray text-xs mt-1">80г • Хрустящее тесто, картофель, зелёный горох, морковь, кешью.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <img src="https://plus.unsplash.com/premium_photo-1695297516694-2e6f40b2860d?q=80&w=2070&auto=format&fit=crop" class="w-20 h-20 object-cover rounded-lg opacity-80" alt="Roll">
+                            <div class="flex-1 border-b border-thali-gray/20 pb-4">
+                                <div class="flex justify-between">
+                                    <h3 class="text-xl font-bold text-gray-200">Рулетка овощная</h3>
+                                    <span class="text-thali-gold font-bold">120 ₽</span>
+                                </div>
+                                <p class="text-thali-gray text-xs mt-1">100г • Тонкое тесто, капуста, морковь, яйцо, фирменный соус.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 3: Tandoor & Biryani -->
+    <section id="tandoor" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl text-thali-gold section-title">Огонь и Рис</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Tandoor Items -->
+            <div class="glass-card p-6 rounded-xl text-center">
+                <div class="mb-4 overflow-hidden rounded-full w-32 h-32 mx-auto border-2 border-thali-copper">
+                    <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=2080&auto=format&fit=crop" alt="Chicken Tikka" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-lg font-bold text-thali-gold">Чикен Тикка</h3>
+                <p class="text-thali-gray text-xs my-2">100г • Красный маринад</p>
+                <div class="text-xl font-serif text-white">250 ₽</div>
+            </div>
+
+            <div class="glass-card p-6 rounded-xl text-center">
+                <div class="mb-4 overflow-hidden rounded-full w-32 h-32 mx-auto border-2 border-thali-copper">
+                    <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=2080&auto=format&fit=crop" alt="Malai Tikka" class="w-full h-full object-cover grayscale hover:grayscale-0 transition">
+                </div>
+                <h3 class="text-lg font-bold text-thali-gold">Чикен Малай Тикка</h3>
+                <p class="text-thali-gray text-xs my-2">100г • Сливочный маринад</p>
+                <div class="text-xl font-serif text-white">250 ₽</div>
+            </div>
+
+            <!-- Biryani Items -->
+            <div class="glass-card p-6 rounded-xl text-center lg:col-span-2 flex flex-col justify-center relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=2010&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-20" alt="Biryani">
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-serif text-thali-copper mb-4">Бирияни и Тихари</h3>
+                    <div class="flex justify-between items-center border-b border-thali-gray/30 pb-2 mb-2">
+                        <span class="text-left">Бирияни с курицей <span class="text-xs text-gray-400 block">400г • Рис басмати, шафран, масала</span></span>
+                        <span class="text-thali-gold font-bold">550 ₽</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-left">Тихари с мясом <span class="text-xs text-gray-400 block">400г • Рис басмати, мясо, овощи</span></span>
+                        <span class="text-thali-gold font-bold">550 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 4: Curry -->
+    <section id="curry" class="py-20 bg-fixed bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=2574&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-thali-black/90"></div>
+        <div class="relative max-w-7xl mx-auto px-4">
+            <h2 class="font-serif text-4xl text-thali-gold section-title mb-12">Аутентичные Карри</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Curry Items -->
+                <div class="glass-card p-6 rounded-r-2xl border-l-4 border-l-thali-gold">
+                    <h3 class="text-xl font-bold text-white mb-1">Карри с мясом и рисом</h3>
+                    <p class="text-thali-gray text-sm mb-3">350г • Мясо в густом соусе, подается с рисом басмати.</p>
+                    <div class="text-thali-gold text-lg font-bold">490 ₽</div>
+                </div>
+
+                <div class="glass-card p-6 rounded-r-2xl border-l-4 border-l-thali-gold">
+                    <h3 class="text-xl font-bold text-white mb-1">Карри с курицей и рисом</h3>
+                    <p class="text-thali-gray text-sm mb-3">350г • Куриное филе в пряном соусе, с рисом басмати.</p>
+                    <div class="text-thali-gold text-lg font-bold">490 ₽</div>
+                </div>
+
+                <div class="glass-card p-6 rounded-r-2xl border-l-4 border-l-thali-copper">
+                    <h3 class="text-xl font-bold text-white mb-1">Карри с овощами и рисом</h3>
+                    <p class="text-thali-gray text-sm mb-3">350г • Микс сезонных овощей, с рисом басмати.</p>
+                    <div class="text-thali-gold text-lg font-bold">450 ₽</div>
+                </div>
+
+                <div class="glass-card p-6 rounded-r-2xl border-l-4 border-l-thali-copper">
+                    <h3 class="text-xl font-bold text-white mb-1">Чана Масала</h3>
+                    <p class="text-thali-gray text-sm mb-3">150г • Нут, тушенный в соусе из томатов и специй.</p>
+                    <div class="text-thali-gold text-lg font-bold">150 ₽</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 5 & 6: Bread, Rice, Noodles -->
+    <section id="bread" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-3 gap-12">
+            <!-- Bread -->
+            <div class="lg:col-span-1">
+                <h3 class="font-serif text-2xl text-thali-copper mb-6 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-thali-copper"></span> Выпечка из Тандура
+                </h3>
+                <ul class="space-y-6">
+                    <li class="flex justify-between items-center group">
+                        <div>
+                            <div class="font-bold text-gray-200 group-hover:text-thali-gold transition">Гарлик Нан</div>
+                            <div class="text-xs text-thali-gray">150г • С чесноком и маслом</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">250 ₽</div>
+                    </li>
+                    <li class="flex justify-between items-center group">
+                        <div>
+                            <div class="font-bold text-gray-200 group-hover:text-thali-gold transition">Классический Нан</div>
+                            <div class="text-xs text-thali-gray">150г • Пшеничная лепешка</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">200 ₽</div>
+                    </li>
+                    <li class="flex justify-between items-center group">
+                        <div>
+                            <div class="font-bold text-gray-200 group-hover:text-thali-gold transition">Панир Парата</div>
+                            <div class="text-xs text-thali-gray">150г • С сыром панир</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">200 ₽</div>
+                    </li>
+                    <li class="flex justify-between items-center group">
+                        <div>
+                            <div class="font-bold text-gray-200 group-hover:text-thali-gold transition">Роти</div>
+                            <div class="text-xs text-thali-gray">120г • Цельнозерновая мука</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">100 ₽</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Rice -->
+            <div class="lg:col-span-1">
+                <h3 class="font-serif text-2xl text-thali-copper mb-6 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-thali-copper"></span> Рис Басмати
+                </h3>
+                <ul class="space-y-6">
+                    <li class="flex justify-between items-center">
+                        <div>
+                            <div class="font-bold text-gray-200">С овощами и яйцом</div>
+                            <div class="text-xs text-thali-gray">250г</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">550 ₽</div>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <div>
+                            <div class="font-bold text-gray-200">С овощами</div>
+                            <div class="text-xs text-thali-gray">250г</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">550 ₽</div>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <div>
+                            <div class="font-bold text-gray-200">Классический</div>
+                            <div class="text-xs text-thali-gray">200г</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">250 ₽</div>
+                    </li>
+                </ul>
+            </div>
+
+             <!-- Noodles -->
+             <div class="lg:col-span-1">
+                <h3 class="font-serif text-2xl text-thali-copper mb-6 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-thali-copper"></span> Лапша (Wok)
+                </h3>
+                <ul class="space-y-6">
+                    <li class="flex justify-between items-center">
+                        <div>
+                            <div class="font-bold text-gray-200">Лапша Курица/Овощи</div>
+                            <div class="text-xs text-thali-gray">300г</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">490 ₽</div>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <div>
+                            <div class="font-bold text-gray-200">Лапша с овощами и яйцом</div>
+                            <div class="text-xs text-thali-gray">300г</div>
+                        </div>
+                        <div class="font-serif text-thali-copper">390 ₽</div>
+                    </li>
+                </ul>
+                
+                <!-- Rolls Section inserted here to balance layout -->
+                <h3 class="font-serif text-2xl text-thali-copper mt-12 mb-6 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-thali-copper"></span> Роллы
+                </h3>
+                <ul class="space-y-6">
+                    <li class="flex justify-between items-center">
+                        <div class="font-bold text-gray-200">Ролл с курицей</div>
+                        <div class="font-serif text-thali-copper">300 ₽</div>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <div class="font-bold text-gray-200">Ролл Овощи и Панир</div>
+                        <div class="font-serif text-thali-copper">390 ₽</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 8: Sweets & Drinks -->
+    <section id="drinks" class="py-20 bg-thali-dark text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="font-serif text-4xl text-thali-gold section-title mb-16">Сладости и Напитки</h2>
+
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Sweets -->
+                <div>
+                    <h3 class="text-2xl font-serif text-white mb-8">Десерты</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card p-4 rounded-lg">
+                            <div class="text-thali-gold font-bold text-lg">85 ₽</div>
+                            <div class="text-white font-bold">Ладду Кокосовое</div>
+                            <div class="text-xs text-thali-gray mt-2">Кокос, сливки, пряности</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <div class="text-thali-gold font-bold text-lg">85 ₽</div>
+                            <div class="text-white font-bold">Ладду Морковное</div>
+                            <div class="text-xs text-thali-gray mt-2">Морковь, фисташки</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <div class="text-thali-gold font-bold text-lg">85 ₽</div>
+                            <div class="text-white font-bold">Бурфи</div>
+                            <div class="text-xs text-thali-gray mt-2">Нут, орех, изюм</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <div class="text-thali-gold font-bold text-lg">95 ₽</div>
+                            <div class="text-white font-bold">Гулаб Джамун</div>
+                            <div class="text-xs text-thali-gray mt-2">Молочные шарики в сиропе</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drinks -->
+                <div class="text-left pl-0 md:pl-10 border-l-0 md:border-l border-thali-gray/20">
+                    <h3 class="text-2xl font-serif text-white mb-8 text-center md:text-left">Напитки</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center border-b border-gray-800 pb-2">
+                            <span>Чай Масала с молоком <span class="text-xs text-gray-500 ml-2">300мл</span></span>
+                            <span class="text-thali-copper">110 ₽</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-800 pb-2">
+                            <span>Чай Масала без молока <span class="text-xs text-gray-500 ml-2">500мл</span></span>
+                            <span class="text-thali-copper">90 ₽</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-800 pb-2">
+                            <span>Чай Куркумин <span class="text-xs text-gray-500 ml-2">500мл</span></span>
+                            <span class="text-thali-copper">110 ₽</span>
+                        </li>
+                        <li class="flex justify-between items-center pt-4">
+                            <span>Американо / Капучино / Латте</span>
+                            <span class="text-thali-copper">140 ₽</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Эспрессо</span>
+                            <span class="text-thali-copper">180 ₽</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 text-center border-t border-thali-copper/20">
+        <div class="font-serif text-3xl text-thali-gold font-bold tracking-widest mb-6">ТХАЛИ</div>
+        <p class="text-thali-gray text-sm mb-4">Вкус настоящей Индии</p>
+        <div class="text-xs text-gray-600">
+            &copy; 2026 Тхали. Все права защищены.<br>
+            Дизайн меню: Проект Dina
+        </div>
+    </footer>
+
+</body>
+</html>
