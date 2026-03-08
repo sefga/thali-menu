@@ -16,7 +16,7 @@
 
 /* === Сброс и базовые стили === */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 8rem; }
+html { scroll-padding-top: 8rem; }
 
 body {
   margin: 0;
@@ -36,6 +36,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
   opacity: 0.4;
+  will-change: transform;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.015), transparent 28%),
     linear-gradient(315deg, rgba(255, 255, 255, 0.015), transparent 24%);

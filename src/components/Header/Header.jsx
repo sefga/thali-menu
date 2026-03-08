@@ -26,26 +26,34 @@ export default function Header() {
   }, []);
 
   // IntersectionObserver для определения видимой секции
+  // Один порог (0) + requestAnimationFrame для предотвращения дёргания
   useEffect(() => {
     const sectionEls = menuSections
       .map((s) => document.getElementById(s.id))
       .filter(Boolean);
 
+    let rafId = null;
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) {
-          setActiveId(visible.target.id);
-          scrollNavToActive(visible.target.id);
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(() => {
+            setActiveId(visible.target.id);
+            scrollNavToActive(visible.target.id);
+          });
         }
       },
-      { rootMargin: '-38% 0px -48% 0px', threshold: [0.15, 0.3, 0.55] },
+      { rootMargin: '-40% 0px -50% 0px', threshold: 0 },
     );
 
     sectionEls.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [scrollNavToActive]);
 
   return (

@@ -8,6 +8,7 @@
   padding-bottom: 0.25rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
 }
 
 .poster-strip::-webkit-scrollbar { display: none; }
